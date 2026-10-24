@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Learning - Free Business & Skills Hub</title>
+    <title>NextGen Learning - Free Knowledge Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -20,275 +20,308 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #0b0f19; color: #f3f4f6; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body class="bg-darkBg text-slate-100 min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+<body class="font-sans antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="filterCategory('All')">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                    <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-darkBg/90 backdrop-blur-md border-b border-gray-800 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white p-2 rounded-xl">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">NextGen Learning</span>
-                    <span class="block text-[10px] text-blue-400 font-medium tracking-widest uppercase">Free Knowledge Hub</span>
+                    <h1 class="font-bold text-lg leading-tight">NextGen Learning</h1>
+                    <p class="text-xs text-blue-400 font-medium tracking-wide">FREE KNOWLEDGE HUB</p>
                 </div>
             </div>
-
-            <!-- Search Bar -->
-            <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
-                <div class="relative w-full">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
-                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                    </span>
-                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search business courses, marketing, AI..." 
-                        class="w-full bg-slate-900/80 border border-slate-700/80 rounded-full pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
-                </div>
-            </div>
-
-            <!-- Actions -->
-            <div class="flex items-center space-x-3">
-                <button onclick="openSubmitModal()" class="hidden sm:inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-3.5 py-2 rounded-lg border border-slate-700 transition-all">
-                    <i class="fa-solid fa-plus text-blue-400"></i>
-                    <span>Submit Video</span>
+            <div class="flex items-center gap-2">
+                <button onclick="toggleModal('submitModal')" class="bg-gray-800 hover:bg-gray-700 text-xs sm:text-sm px-3 py-2 rounded-lg font-medium border border-gray-700 transition">
+                    Submit Video
                 </button>
-                <div class="w-9 h-9 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-sm">
-                    SR
-                </div>
-            </div>
-        </div>
-        <!-- Mobile Search Bar -->
-        <div class="px-4 pb-3 md:hidden">
-            <div class="relative w-full">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
-                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                </span>
-                <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="Search business courses, marketing..." 
-                    class="w-full bg-slate-900/80 border border-slate-700/80 rounded-full pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500">
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        
-        <!-- Hero Banner -->
-        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-900/40 via-indigo-900/30 to-purple-900/40 border border-blue-500/20 p-6 sm:p-10 mb-8 shadow-2xl">
-            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="relative z-10 max-w-2xl">
-                <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-semibold mb-4">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>100% Free & Open Education</span>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-6 w-full space-y-8">
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-cardBg via-gray-900 to-darkBg p-6 sm:p-10 rounded-2xl border border-gray-800 shadow-xl text-left">
+            <div class="max-w-2xl space-y-4">
+                <span class="bg-blue-500/10 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/20">
+                    100% Free & Open Access
                 </span>
-                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
                     Master Business, Marketing & Tech Skills for Free
-                </h1>
-                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-                    Hand-picked video tutorials, practical startup guides, and downloadable templates. Learn at your own pace without any paywalls.
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Hand-picked video tutorials, practical startup guides, and actionable resources. Learn at your own pace without any paywalls.
                 </p>
-                <div class="flex flex-wrap gap-3">
-                    <a href="#video-grid" class="bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center space-x-2">
-                        <i class="fa-solid fa-play"></i>
-                        <span>Explore Videos</span>
+                <div class="pt-2 flex flex-wrap gap-3">
+                    <a href="#videoGrid" class="bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm px-5 py-2.5 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-play text-xs"></i> Explore Videos
                     </a>
-                    <button onclick="openSubmitModal()" class="bg-slate-800/80 hover:bg-slate-800 text-slate-200 font-medium text-sm px-5 py-2.5 rounded-xl border border-slate-700 transition-all flex items-center space-x-2">
-                        <i class="fa-solid fa-share-nodes text-purple-400"></i>
-                        <span>Share Content</span>
+                    <button onclick="toggleModal('submitModal')" class="bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium text-sm px-5 py-2.5 rounded-xl border border-gray-700 transition flex items-center gap-2">
+                        <i class="fa-solid fa-share-nodes text-xs"></i> Share Content
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Category Filters -->
-        <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-6 scrollbar-none" id="categoryFilters">
-            <button onclick="filterCategory('All')" class="category-btn active px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-blue-600 text-white shadow-lg shadow-blue-600/20">All Topics</button>
-            <button onclick="filterCategory('Business Basics')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700">Business Basics</button>
-            <button onclick="filterCategory('Digital Marketing')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700">Digital Marketing</button>
-            <button onclick="filterCategory('Financial Literacy')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700">Financial Literacy</button>
-            <button onclick="filterCategory('Side Hustles')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700">Side Hustles</button>
-            <button onclick="filterCategory('AI & Tools')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all bg-slate-800/80 hover:bg-slate-800 text-slate-300 border border-slate-700">AI & Tools</button>
-        </div>
-
-        <!-- Video Grid Heading -->
-        <div class="flex items-center justify-between mb-6">
-            <h2 id="sectionTitle" class="text-xl font-bold text-white flex items-center space-x-2">
-                <span>Featured Video Lessons</span>
-                <span id="videoCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">6 videos</span>
-            </h2>
-            <div class="text-xs text-slate-400">Click any card to watch & access resources</div>
-        </div>
-
-        <!-- Video Grid Container -->
-        <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamic Video Cards will be inserted here -->
-        </div>
-
-        <!-- Empty Search State -->
-        <div id="emptyState" class="hidden text-center py-16">
-            <div class="w-16 h-16 bg-slate-800/80 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400 text-xl border border-slate-700">
-                <i class="fa-solid fa-face-frown"></i>
+        <!-- Search & Filter Controls -->
+        <section class="space-y-4">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input type="text" id="searchInput" oninput="filterVideos()" placeholder="Search business courses, marketing, AI tools..." class="w-full bg-cardBg border border-gray-800 rounded-xl py-3 pl-11 pr-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500 transition">
             </div>
-            <h3 class="text-lg font-bold text-white mb-1">No video lessons found</h3>
-            <p class="text-slate-400 text-sm mb-4">Try searching with different keywords or switch categories.</p>
-            <button onclick="filterCategory('All')" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all">Reset Filters</button>
+
+            <!-- Categories -->
+            <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar py-1" id="categoryContainer">
+                <button onclick="setCategory('All')" class="category-btn active bg-blue-600 text-white text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap transition">All Topics</button>
+                <button onclick="setCategory('Business Basics')" class="category-btn bg-cardBg hover:bg-gray-800 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap border border-gray-800 transition">Business Basics</button>
+                <button onclick="setCategory('Digital Marketing')" class="category-btn bg-cardBg hover:bg-gray-800 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap border border-gray-800 transition">Digital Marketing</button>
+                <button onclick="setCategory('AI & Tech')" class="category-btn bg-cardBg hover:bg-gray-800 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap border border-gray-800 transition">AI & Tech</button>
+                <button onclick="setCategory('Financial Literacy')" class="category-btn bg-cardBg hover:bg-gray-800 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap border border-gray-800 transition">Financial Literacy</button>
+            </div>
+        </section>
+
+        <!-- Video Section Header -->
+        <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+            <h3 class="font-bold text-lg text-white">Featured Video Lessons</h3>
+            <span id="videoCount" class="text-xs text-gray-400">6 videos available</span>
         </div>
 
+        <!-- Video Cards Grid -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="videoGrid">
+            <!-- Cards generated dynamically via JavaScript -->
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900/90 border-t border-slate-800 mt-16 py-8 text-center text-xs text-slate-400">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center space-x-2">
-                <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white text-xs">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-                <span class="font-semibold text-slate-200">NextGen Learning</span>
-                <span>© 2026. Free Knowledge for Everyone.</span>
-            </div>
-            <div class="flex space-x-6">
-                <a href="#" class="hover:text-blue-400 transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-400 transition-colors">Terms of Use</a>
-                <a href="#" onclick="openSubmitModal(); return false;" class="hover:text-blue-400 transition-colors">Contribute</a>
-            </div>
-        </div>
+    <footer class="border-t border-gray-800 mt-12 py-6 bg-cardBg/50 text-center text-xs text-gray-500">
+        <p>© 2026 NextGen Learning. Free and open educational platform.</p>
     </footer>
 
-    <!-- Video Player / Details Modal -->
-    <div id="videoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-all border border-slate-700">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <!-- Modal Content -->
-            <div class="p-6 sm:p-8">
-                <!-- Video Player Frame -->
-                <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black shadow-lg mb-6 border border-slate-800">
-                    <iframe id="modalIframe" class="w-full h-full" src="" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <!-- VIDEO MODAL PLAYER -->
+    <div id="videoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-gray-800 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+            <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-900/50">
+                <h3 id="modalTitle" class="font-bold text-white text-base sm:text-lg truncate pr-4">Video Lesson</h3>
+                <button onclick="closeVideoModal()" class="text-gray-400 hover:text-white p-1 text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-4 overflow-y-auto space-y-4">
+                <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
+                    <iframe id="modalIframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                
+                <div>
+                    <span id="modalCategory" class="text-xs font-semibold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md border border-blue-500/20">Category</span>
+                    <p id="modalDescription" class="text-gray-300 text-sm mt-3 leading-relaxed"></p>
                 </div>
 
-                <!-- Video Meta -->
-                <div class="flex items-center justify-between mb-3">
-                    <span id="modalCategory" class="text-xs px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 font-semibold border border-blue-500/20">Category</span>
-                    <span id="modalDuration" class="text-xs text-slate-400 flex items-center space-x-1">
-                        <i class="fa-regular fa-clock"></i>
-                        <span id="modalDurationText">12 mins</span>
-                    </span>
+                <div class="bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Key Takeaways</h4>
+                    <ul id="modalTakeaways" class="text-xs sm:text-sm text-gray-300 space-y-1.5 list-disc pl-4"></ul>
                 </div>
-                <h2 id="modalTitle" class="text-xl sm:text-2xl font-bold text-white mb-3">Lesson Title Here</h2>
-                <p id="modalDescription" class="text-slate-300 text-sm leading-relaxed mb-6">Detailed description goes here...</p>
-
-                <!-- Key Takeaways Box -->
-                <div class="bg-slate-800/40 border border-slate-700/60 rounded-xl p-4 mb-6">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-blue-400 mb-2 flex items-center space-x-2">
-                        <i class="fa-solid fa-lightbulb"></i>
-                        <span>Key Takeaways</span>
-                    </h4>
-                    <ul id="modalTakeaways" class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-                        <!-- Dynamic takeaways -->
-                    </ul>
-                </div>
-
-                <!-- Downloadable Resource Action -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 p-4 rounded-xl mb-6">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-lg">
-                            <i class="fa-solid fa-file-arrow-down"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-sm font-bold text-white">Free Learning Resource</h5>
-                            <p class="text-xs text-slate-400">Download checklist or summary worksheet</p>
-                        </div>
-                    </div>
-                    <a id="modalResourceBtn" href="#" target="_blank" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg text-center transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-download"></i>
-                        <span>Download PDF / Tool</span>
-                    </a>
-                </div>
-
-                <!-- Discussion Section -->
-                <div class="border-t border-slate-800 pt-6">
-                    <h4 class="text-sm font-bold text-white mb-4 flex items-center space-x-2">
-                        <i class="fa-regular fa-comments text-blue-400"></i>
-                        <span>Discussion & Questions</span>
-                    </h4>
-                    <div class="flex space-x-3 mb-4">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                            SR
-                        </div>
-                        <div class="flex-grow flex gap-2">
-                            <input type="text" id="commentInput" placeholder="Ask a question or share your thoughts..." class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500">
-                            <button onclick="postComment()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all flex-shrink-0">Post</button>
-                        </div>
-                    </div>
-                    <div id="commentsList" class="space-y-3">
-                        <!-- Dynamic comments -->
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
 
-    <!-- Submit Video Modal -->
-    <div id="submitModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative animate-in fade-in zoom-in duration-200">
-            <button onclick="closeSubmitModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="flex items-center space-x-3 mb-4">
-                <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                    <i class="fa-solid fa-video text-lg"></i>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-white">Submit a Free Video</h3>
-                    <p class="text-xs text-slate-400">Share a helpful YouTube tutorial or business guide</p>
-                </div>
+    <!-- SUBMIT CONTENT MODAL -->
+    <div id="submitModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-gray-800 w-full max-w-md rounded-2xl p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h3 class="font-bold text-white text-lg">Suggest a Video</h3>
+                <button onclick="toggleModal('submitModal')" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
-
-            <form onsubmit="handleVideoSubmission(event)" class="space-y-4">
+            <p class="text-xs text-gray-400">Found a high-value free video or guide? Share the link below for review.</p>
+            <form onsubmit="handleFormSubmit(event)" class="space-y-3">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Video Title</label>
-                    <input type="text" id="subTitle" required placeholder="e.g. How to Validate a Startup Idea" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Video Title</label>
+                    <input type="text" required placeholder="e.g. Intro to Digital Marketing" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">YouTube Video URL or ID</label>
-                    <input type="text" id="subUrl" required placeholder="e.g. dQw4w9WgXcQ or full youtube link" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    <label class="block text-xs font-medium text-gray-300 mb-1">YouTube URL</label>
+                    <input type="url" required placeholder="https://youtube.com/watch?v=..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Category</label>
-                    <select id="subCategory" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
-                        <option value="Business Basics">Business Basics</option>
-                        <option value="Digital Marketing">Digital Marketing</option>
-                        <option value="Financial Literacy">Financial Literacy</option>
-                        <option value="Side Hustles">Side Hustles</option>
-                        <option value="AI & Tools">AI & Tools</option>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Category</label>
+                    <select class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-blue-500">
+                        <option>Business Basics</option>
+                        <option>Digital Marketing</option>
+                        <option>AI & Tech</option>
+                        <option>Financial Literacy</option>
                     </select>
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Short Description</label>
-                    <textarea id="subDesc" required rows="3" placeholder="Briefly explain what learners will gain..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs py-3 rounded-xl shadow-lg shadow-blue-600/30 transition-all">
-                    Publish Video to Platform
-                </button>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs py-3 rounded-lg transition mt-2">Submit for Review</button>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript Data and App Logic -->
+    <!-- JavaScript logic -->
     <script>
-        let videos = [
+        const videos = [
             {
                 id: 1,
-                title: "How to Start a Business with Zero Capital in 2026",
+                title: "How to Start a Startup: Business Fundamentals",
                 category: "Business Basics",
-                duration: "14 mins",
-                youtubeId: "dQw4w9WgXcQ", // Placeholder video ID or standard tutorial ID
-                thumbnail: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80",
-                description: "Learn the foundational blueprint for starting a service or digital business without spending money on inventory or expensive software.",
-                takeaways: [
-                    "V
+                embedId: "CBYhVcO4WgI",
+                description: "Learn the core essentials of evaluating business ideas, validating customer demand, and structuring your initial startup framework.",
+                takeaways: ["Idea validation strategies", "Building a lean MVP", "Target customer profiling"]
+            },
+            {
+                id: 2,
+                title: "Digital Marketing Strategy 101 for Beginners",
+                category: "Digital Marketing",
+                embedId: "nU-IIXBWlS4",
+                description: "A complete step-by-step roadmap to organic digital marketing, search visibility, and acquiring your first 1,000 customers.",
+                takeaways: ["Organic growth channels", "Content marketing funnel", "Basic SEO tactics"]
+            },
+            {
+                id: 3,
+                title: "Practical AI Tools for Daily Productivity",
+                category: "AI & Tech",
+                embedId: "sTeoEFzTUGw",
+                description: "Discover how modern AI assistants, prompt engineering, and automated workflows can save hours every single week.",
+                takeaways: ["Automating repetitive tasks", "Effective prompt techniques", "AI tool selection"]
+            },
+            {
+                id: 4,
+                title: "Financial Literacy & Personal Money Management",
+                category: "Financial Literacy",
+                embedId: "PHe0bXAIuk0",
+                description: "Understand budgeting, cash flow principles, and foundational personal finance strategies tailored for young professionals.",
+                takeaways: ["50/30/20 budgeting framework", "Emergency fund planning", "Asset vs liability management"]
+            },
+            {
+                id: 5,
+                title: "Building Modern Web Apps with No-Code & HTML",
+                category: "AI & Tech",
+                embedId: "mU6anWqZJcc",
+                description: "An overview of rapid prototyping and web design basics to get your online ideas built and published quickly.",
+                takeaways: ["Responsive UI basics", "Web deployment workflows", "Structuring web content"]
+            },
+            {
+                id: 6,
+                title: "Branding & Customer Pitching Essentials",
+                category: "Business Basics",
+                embedId: "1-SJGQ2HLp8",
+                description: "Master the art of pitching your value proposition clearly and constructing a memorable identity for your brand.",
+                takeaways: ["Elevator pitch formula", "Brand positioning principles", "Overcoming customer objections"]
+            }
+        ];
+
+        let currentCategory = "All";
+
+        function renderVideos(list) {
+            const grid = document.getElementById('videoGrid');
+            grid.innerHTML = '';
+            
+            document.getElementById('videoCount').innerText = `${list.length} videos available`;
+
+            if (list.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 text-sm">No videos found matching your search.</div>`;
+                return;
+            }
+
+            list.forEach(video => {
+                const card = document.createElement('div');
+                card.className = "bg-cardBg border border-gray-800 rounded-2xl overflow-hidden shadow-lg hover:border-gray-700 transition duration-200 cursor-pointer flex flex-col justify-between";
+                card.onclick = () => openVideoModal(video.id);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative aspect-video bg-gray-900 group">
+                            <img src="https://img.youtube.com/vi/${video.embedId}/hqdefault.jpg" alt="${video.title}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 flex items-center justify-center transition">
+                                <div class="bg-blue-600/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <span class="text-[10px] font-semibold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">${video.category}</span>
+                            <h4 class="font-bold text-white text-sm line-clamp-2 leading-snug">${video.title}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-2">${video.description}</p>
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4 pt-1 flex items-center text-xs text-blue-400 font-medium">
+                        <span>Watch Lesson</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterVideos() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = videos.filter(v => {
+                const matchesCat = currentCategory === "All" || v.category === currentCategory;
+                const matchesQuery = v.title.toLowerCase().includes(query) || v.description.toLowerCase().includes(query);
+                return matchesCat && matchesQuery;
+            });
+            renderVideos(filtered);
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('All Topics'))) {
+                    btn.className = "category-btn active bg-blue-600 text-white text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap transition";
+                } else {
+                    btn.className = "category-btn bg-cardBg hover:bg-gray-800 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap border border-gray-800 transition";
+                }
+            });
+            filterVideos();
+        }
+
+        function openVideoModal(id) {
+            const video = videos.find(v => v.id === id);
+            if (!video) return;
+
+            document.getElementById('modalTitle').innerText = video.title;
+            document.getElementById('modalCategory').innerText = video.category;
+            document.getElementById('modalDescription').innerText = video.description;
+            document.getElementById('modalIframe').src = `https://www.youtube.com/embed/${video.embedId}?autoplay=1`;
+
+            const takeawaysList = document.getElementById('modalTakeaways');
+            takeawaysList.innerHTML = video.takeaways.map(item => `<li>${item}</li>`).join('');
+
+            document.getElementById('videoModal').classList.remove('hidden');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.add('hidden');
+            document.getElementById('modalIframe').src = '';
+        }
+
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.toggle('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert("Thank you! Your video submission has been received for review.");
+            toggleModal('submitModal');
+            e.target.reset();
+        }
+
+        // Initial Render
+        renderVideos(videos);
+    </script>
+</body>
+    </html>
+                    
