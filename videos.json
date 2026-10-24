@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "How to Start a Startup: Business Fundamentals",
+        "category": "Business Basics",
+        "embedId": "CBYhVcO4WgI",
+        "description": "Learn the core essentials of evaluating business ideas, validating customer demand, and structuring your initial startup framework.",
+        "takeaways": ["Idea validation strategies", "Building a lean MVP", "Target customer profiling"]
+    },
+    {
+        "id": 2,
+        "title": "Digital Marketing Strategy 101 for Beginners",
+        "category": "Digital Marketing",
+        "embedId": "nU-IIXBWlS4",
+        "description": "A complete step-by-step roadmap to organic digital marketing, search visibility, and acquiring your first 1,000 customers.",
+        "takeaways": ["Organic growth channels", "Content marketing funnel", "Basic SEO tactics"]
+    },
+    {
+        "id": 3,
+        "title": "Practical AI Tools for Daily Productivity",
+        "category": "AI & Tech",
+        "embedId": "sTeoEFzTUGw",
+        "description": "Discover how modern AI assistants, prompt engineering, and automated workflows can save hours every single week.",
+        "takeaways": ["Automating repetitive tasks", "Effective prompt techniques", "AI tool selection"]
+    },
+    {
+        "id": 4,
+        "title": "Financial Literacy & Personal Money Management",
+        "category": "Financial Literacy",
+        "embedId": "PHe0bXAIuk0",
+        "description": "Understand budgeting, cash flow principles, and foundational personal finance strategies tailored for young professionals.",
+        "takeaways": ["50/30/20 budgeting framework", "Emergency fund planning", "Asset vs liability management"]
+    },
+    {
+        "id": 5,
+        "title": "Building Modern Web Apps with No-Code & HTML",
+        "category": "AI & Tech",
+        "embedId": "mU6anWqZJcc",
+        "description": "An overview of rapid prototyping and web design basics to get your online ideas built and published quickly.",
+        "takeaways": ["Responsive UI basics", "Web deployment workflows", "Structuring web content"]
+    },
+    {
+        "id": 6,
+        "title": "Branding & Customer Pitching Essentials",
+        "category": "Business Basics",
+        "embedId": "1-SJGQ2HLp8",
+        "description": "Master the art of pitching your value proposition clearly and constructing a memorable identity for your brand.",
+        "takeaways": ["Elevator pitch formula", "Brand positioning principles", "Overcoming customer objections"]
+    }
+]
