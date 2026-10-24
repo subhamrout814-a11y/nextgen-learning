@@ -319,8 +319,21 @@
             e.target.reset();
         }
 
-        // Initial Render
-        renderVideos(videos);
+             let videos = [];
+
+        // Fetch videos dynamically from your JSON file
+        fetch('videos.json')
+            .then(response => response.json())
+            .then(data => {
+                videos = data;
+                renderVideos(videos);
+            })
+            .catch(error => {
+                console.error('Error loading videos:', error);
+                document.getElementById('videoGrid').innerHTML = `<div class="col-span-full text-center py-12 text-red-400 text-sm">Failed to load video library.</div>`;
+            });
+   
+        
     </script>
 </body>
     </html>
